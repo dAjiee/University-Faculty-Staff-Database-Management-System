@@ -4,7 +4,7 @@
  */
 package ReadnWrite;
 
-import Main.Sanitize;
+import TestMain.Sanitize;
 import Source.Student;
 import Source.StudentCRUD;
 import java.io.BufferedReader;
@@ -50,7 +50,12 @@ public class StudentRU {
     public void write(StudentCRUD student){
         try (FileWriter filewriter = new FileWriter(filename)) {
             for(Student stud : student.studentlist){
-                filewriter.write(stud.getFname() + ";" + stud.getLname() + ";" + stud.getAddress() + ";" + stud.getId() + ";" + stud.getCourse() + ";" + stud.getYearlevel() + System.lineSeparator());}
+                filewriter.write(Sanitize.sanitize(stud.getFname()) + ";" + 
+                        Sanitize.sanitize(stud.getLname()) + ";" + 
+                        Sanitize.sanitize(stud.getAddress()) + ";" + 
+                        stud.getId() + ";" + 
+                        Sanitize.sanitize(stud.getCourse()) + ";" + 
+                        stud.getYearlevel() + System.lineSeparator());}
         }
         catch(IOException e){
             JOptionPane.showMessageDialog(null, "Error Updating File!\n" + Arrays.toString(e.getStackTrace()), "Error!", JOptionPane.ERROR_MESSAGE);

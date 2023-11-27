@@ -1,0 +1,2 @@
+Ic124;Programming Paradigm;2:30 - 4:30;3
+Ic125;Discrete Math;9:00 - 12:00;3

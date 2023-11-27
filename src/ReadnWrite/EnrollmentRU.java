@@ -4,13 +4,13 @@
  */
 package ReadnWrite;
 
-import Main.Sanitize;
+import TestMain.Sanitize;
 import Source.EnrollmentCRUD;
 import Source.Student;
 import Source.StudentCRUD;
 import Source.Subject;
 import Source.SubjectCRUD;
-import Source.SubjectEnrolled;
+import Source.Enrollment;
 import Source.Teacher;
 import Source.TeacherCRUD;
 import java.io.BufferedReader;
@@ -59,7 +59,7 @@ public class EnrollmentRU {
                 
                 Double grade = Double.valueOf(Sanitize.sanitize(arr[3]));
                 
-                SubjectEnrolled se = new SubjectEnrolled(subject, student, teacher, grade);
+                Enrollment se = new Enrollment(subject, student, teacher, grade);
                 enrollment.createSE(se);
             }
         }
@@ -71,8 +71,12 @@ public class EnrollmentRU {
     //writer
     public void write(EnrollmentCRUD enrollment){
         try (FileWriter filewriter = new FileWriter(filename)) {
-            for(SubjectEnrolled se : enrollment.enlist){
-                filewriter.write(se.getSubject().getTitlecode() + ";" + se.getStudent().getId() + ";" + se.getTeacher().getId() + ";" + se.getGrade() + System.lineSeparator());}
+            for(Enrollment se : enrollment.enlist){
+                filewriter.write(
+                        Sanitize.sanitize(se.getSubject().getTitlecode()) + ";" + 
+                        se.getStudent().getId() + ";" + 
+                        se.getTeacher().getId() + ";" + 
+                        se.getGrade() + System.lineSeparator());}
         }
         catch(IOException e){
             JOptionPane.showMessageDialog(null, "Error Updating File!\n" + Arrays.toString(e.getStackTrace()), "Error!", JOptionPane.ERROR_MESSAGE);

@@ -4,7 +4,7 @@
  */
 package ReadnWrite;
 
-import Main.Sanitize;
+import TestMain.Sanitize;
 import Source.Subject;
 import Source.SubjectCRUD;
 import java.io.BufferedReader;
@@ -48,7 +48,11 @@ public class SubjectRU {
     public void write(SubjectCRUD subject){
         try (FileWriter filewriter = new FileWriter(filename)) {
             for(Subject sub : subject.subjectlist){
-                filewriter.write(sub.getTitlecode() + ";" + sub.getDescription() + ";" + sub.getSchedule() + ";" + sub.getUnit() + System.lineSeparator());}
+                filewriter.write(
+                        Sanitize.sanitize(sub.getTitlecode()) + ";" +
+                        Sanitize.sanitize(sub.getDescription()) + ";" + 
+                        Sanitize.sanitize(sub.getSchedule()) + ";" + 
+                        sub.getUnit() + System.lineSeparator());}
         }
         catch(IOException e){
             JOptionPane.showMessageDialog(null, "Error Updating File!\n" + Arrays.toString(e.getStackTrace()), "Error!", JOptionPane.ERROR_MESSAGE);

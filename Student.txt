@@ -1,0 +1,3 @@
+Alexander;Villasis;Dacoville;1;Bsit;1
+Julius;Ayuno;Dacoville;2;Bsit;1
+John Roice;Aldeza;Obrero;3;Bsit;1

@@ -12,6 +12,14 @@ public class Person {
     private String fname, lname, address;
     private int id;
     
+    Person(){
+        this.fname = "";
+        this.fname = "";
+        this.lname = "";
+        this.address = "";
+        this.id = 0;
+    }
+    
     Person(String fname, String lname, String address, int id){
         this.fname = fname;
         this.lname = lname;

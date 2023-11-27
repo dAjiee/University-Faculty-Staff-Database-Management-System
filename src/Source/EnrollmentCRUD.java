@@ -11,25 +11,25 @@ import java.util.ArrayList;
  * @author Extension PC1
  */
 public class EnrollmentCRUD {
-    public ArrayList<SubjectEnrolled> enlist;
+    public ArrayList<Enrollment> enlist;
     
     public EnrollmentCRUD(){
-        enlist = new ArrayList<SubjectEnrolled>();
+        enlist = new ArrayList<Enrollment>();
     }
     
-    public void createSE(SubjectEnrolled se){
+    public void createSE(Enrollment se){
         enlist.add(se);
     }
     
-    public SubjectEnrolled retrieveSE(SubjectEnrolled se){
-        for(SubjectEnrolled s: enlist){
+    public Enrollment retrieveSE(Enrollment se){
+        for(Enrollment s: enlist){
             if(s.equals(se)) return s;
         }
         return null;
     }
     
-    public void updateSE(SubjectEnrolled se, SubjectEnrolled newse){
-        SubjectEnrolled tempse = retrieveSE(se);
+    public void updateSE(Enrollment se, Enrollment newse){
+        Enrollment tempse = retrieveSE(se);
         if(tempse != null){
             tempse.setSubject(newse.getSubject());
             tempse.setStudent(newse.getStudent());
@@ -38,7 +38,7 @@ public class EnrollmentCRUD {
         }
     }
     
-    public void deleteSE(SubjectEnrolled se){
+    public void deleteSE(Enrollment se){
         boolean found = false;
         for(int i = 0; i < enlist.size() && found != true; i++){
             found = enlist.get(i).equals(se);
@@ -49,10 +49,34 @@ public class EnrollmentCRUD {
         }
     }
     
+    public ArrayList<Enrollment> getClassList(Subject sub){
+        ArrayList<Enrollment> tempCL = new ArrayList<Enrollment>();
+        for(Enrollment se : enlist){
+            if(se.getSubject().equals(sub)) tempCL.add(se);
+        }
+        return tempCL;
+    }
+    
+    public ArrayList<Enrollment> getSubjectsEnrolled (Student stud){
+        ArrayList<Enrollment> tempCL = new ArrayList<Enrollment>();
+        for(Enrollment se : enlist){
+            if(se.getStudent().equals(stud)) tempCL.add(se);
+        }
+        return tempCL;
+    }
+    
+    public ArrayList<Enrollment> getFacultyLoad (Teacher t){
+        ArrayList<Enrollment> tempCL = new ArrayList<Enrollment>();
+        for(Enrollment se : enlist){
+            if(se.getTeacher().equals(t)) tempCL.add(se);
+        }
+        return tempCL;
+    }
+    
     @Override
     public String toString(){
         String str = "";
-        for (SubjectEnrolled se: enlist){
+        for (Enrollment se: enlist){
             str += (se.getSubject().getTitlecode() + ";" + se.getStudent().getId() + ";" + se.getTeacher().getId() + ";" + se.getGrade() + "\n");
         }
         return str;
